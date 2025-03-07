@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     public float Vmovement;
     public float Velocity;
     CharacterController controller;
+    public float gravity = -9.8f;
     Transform player;
+    Vector3 speed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,8 +24,11 @@ public class PlayerController : MonoBehaviour
         Vmovement = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * Hmovement + transform.forward * Vmovement;
+        speed.y += gravity * Time.deltaTime;
 
         controller.Move(move*Velocity*Time.deltaTime);
+        controller.Move(speed);
+
     }
 
     public void Playermovement()
